@@ -30,4 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  const scrollCue = document.querySelector('.scroll-cue');
+  const main = document.querySelector('main');
+  if (scrollCue && main) {
+    scrollCue.addEventListener('click', (e) => {
+      e.preventDefault();
+      main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 });

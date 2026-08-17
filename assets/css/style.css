@@ -66,6 +66,9 @@ body {
   position: relative;
   background: #ffffff;
   color: var(--text);
+  min-height: calc(100vh - 110px);
+  display: flex;
+  align-items: center;
   padding: 88px 0 64px;
   overflow: hidden;
 }
@@ -94,7 +97,7 @@ body {
   pointer-events: none;
 }
 
-.hero-inner { position: relative; z-index: 2; text-align: center; }
+.hero-inner { position: relative; z-index: 2; width: 100%; text-align: center; }
 
 .venue-badge {
   display: inline-flex;
@@ -102,14 +105,14 @@ body {
   gap: 10px;
   padding: 10px 22px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.96);
   border: 1px solid var(--border);
-  box-shadow: 0 2px 10px rgba(20,20,50,0.06);
+  box-shadow: 0 2px 10px rgba(20,20,50,0.1);
   font-size: 1.05rem;
   letter-spacing: 0.06em;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #0d0f1a;
 }
 .venue-badge .dot {
   width: 9px; height: 9px;
@@ -125,20 +128,18 @@ body {
 .title-acronym {
   display: block;
   font-size: clamp(2.6rem, 6vw, 3.6rem);
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.01em;
-  background: linear-gradient(90deg, var(--accent), #6a5ff0 55%, #0f9c8e);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 2px 24px rgba(255,255,255,0.6);
+  color: #0d0f1a;
+  text-shadow: 0 0 16px rgba(255,255,255,0.9), 0 0 34px rgba(255,255,255,0.65), 0 2px 4px rgba(255,255,255,0.8);
 }
 .title-rest {
   display: block;
   margin-top: 10px;
   font-size: clamp(1.05rem, 2.4vw, 1.4rem);
-  font-weight: 600;
-  color: var(--text);
+  font-weight: 700;
+  color: #0d0f1a;
+  text-shadow: 0 0 12px rgba(255,255,255,0.85), 0 0 24px rgba(255,255,255,0.55);
 }
 
 .authors {
@@ -150,20 +151,24 @@ body {
   margin: 0 0 8px;
   padding: 0;
   font-size: 1.05rem;
+  font-weight: 700;
 }
 .authors a {
-  color: var(--text);
+  color: #0d0f1a;
   text-decoration: none;
-  border-bottom: 1px solid rgba(26,29,41,0.25);
+  border-bottom: 1px solid rgba(13,15,26,0.35);
   padding-bottom: 1px;
+  text-shadow: 0 0 12px rgba(255,255,255,0.85), 0 0 24px rgba(255,255,255,0.55);
   transition: border-color 0.15s, color 0.15s;
 }
 .authors a:hover { border-color: var(--accent); color: var(--accent); }
 
 .affiliation {
-  color: var(--text-muted);
+  color: #24273a;
+  font-weight: 600;
   font-size: 0.95rem;
   margin: 4px 0 34px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.85), 0 0 20px rgba(255,255,255,0.5);
 }
 
 .cta-row {
@@ -218,6 +223,38 @@ body {
   color: #04231f;
   padding: 2px 6px;
   border-radius: 999px;
+}
+
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.15s ease;
+}
+.scroll-cue:hover { color: var(--accent); }
+.scroll-cue svg {
+  width: 20px;
+  height: 20px;
+  animation: scroll-cue-bounce 1.8s ease-in-out infinite;
+}
+@keyframes scroll-cue-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(7px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue svg { animation: none; }
 }
 
 /* ---------- Stats ---------- */
@@ -419,7 +456,6 @@ body {
   font-size: 0.85rem;
 }
 .footer p { margin: 4px 0; }
-.footer-muted { color: #9aa0b8; font-size: 0.78rem; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 720px) {
