@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEJA: Self-Supervised Joint-Embedding Predictive Architecture for 3D Mesh Semantic Segmentation</title>
+<meta name="description" content="MEJA: A Self-Supervised Joint-Embedding Predictive Architecture for 3D Mesh Semantic Segmentation. BMVC 2026.">
+
+<meta property="og:title" content="MEJA: Self-Supervised Joint-Embedding Predictive Architecture for 3D Mesh Semantic Segmentation">
+<meta property="og:description" content="State-of-the-art semantic segmentation of large-scale 3D textured meshes with a self-supervised JEPA-style pre-training framework. BMVC 2026.">
+<meta property="og:image" content="assets/img/figure1_pca_similarity.webp">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<header class="hero">
+  <div class="container hero-inner">
+    <div class="venue-badge">
+      <span class="dot"></span> BMVC 2026
+    </div>
+
+    <h1 class="title">
+      <span class="title-acronym">MEJA</span>
+      <span class="title-rest">A Self-Supervised Joint-Embedding Predictive Architecture for 3D Mesh Semantic Segmentation</span>
+    </h1>
+
+    <ul class="authors">
+      <li><a href="mailto:heidarianbaei@ipi.uni-hannover.de">Mohammadreza Heidarianbaei</a></li>
+      <li><a href="mailto:mehltretter@ipi.uni-hannover.de">Max Mehltretter</a></li>
+      <li><a href="mailto:rottensteiner@ipi.uni-hannover.de">Franz Rottensteiner</a></li>
+    </ul>
+
+    <p class="affiliation">Institute of Photogrammetry and GeoInformation &middot; Leibniz University Hannover &middot; Germany</p>
+
+    <nav class="cta-row" aria-label="Paper links">
+      <!-- TODO: replace href="#" with your real links when available -->
+      <a class="btn btn-primary" href="#" data-placeholder title="Add your paper PDF / OpenReview link">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 2v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 13h6M9 16.5h6M9 9.5h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Paper
+      </a>
+      <a class="btn" href="#" data-placeholder title="Add your arXiv link">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 2 21h20L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9v6M12 17.5v.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        arXiv
+      </a>
+      <a class="btn" href="#" data-placeholder title="Add your GitHub repo link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .28.18.61.69.5A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+        Code
+      </a>
+      <a class="btn" href="#" data-placeholder title="Add your Hugging Face model repo link">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 13.5s1.2 1.5 3.5 1.5 3.5-1.5 3.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8.5 9.5v.01M15.5 9.5v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Checkpoints
+      </a>
+      <a class="btn" href="#bibtex">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 4h14v16l-4.5-3L10 20l-4.5-3L5 20V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 8h8M8 11.5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        Cite
+      </a>
+    </nav>
+    <p class="placeholder-hint">Links marked as placeholders — update <code>index.html</code> once your paper / repo / checkpoints are live.</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="stats-strip">
+    <div class="container stats-grid">
+      <div class="stat">
+        <div class="stat-value">87.5<span>%</span></div>
+        <div class="stat-label">mF1 on SUM</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">84.7<span>%</span></div>
+        <div class="stat-label">mF1 on seMet</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">54.6<span>%</span></div>
+        <div class="stat-label">mF1 on CH (heritage)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">108M<span></span></div>
+        <div class="stat-label">faces used for self-supervised pre-training</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="abstract">
+    <div class="container narrow">
+      <h2 class="section-title">Abstract</h2>
+      <div class="card">
+        <p>
+          The application of deep learning to large-scale 3D textured meshes generated by photogrammetry is hindered by
+          their structural irregularity and the scarcity of dense semantic annotations. We address these limitations by
+          introducing a new architecture for the semantic segmentation of 3D textured meshes and a self-supervised
+          learning framework. Our network uses FlashAttention to process dense per-pixel texture and employs dynamic
+          multi-configuration clustering to facilitate global information exchange while not requiring manifoldness.
+          We also propose <strong>MEJA</strong> (Mesh Joint-Embedding Predictive Architecture), a self-supervised
+          learning framework for the proposed network based on predicting features for masked mesh clusters, comparing
+          them to features computed for the entire mesh. An evaluation on several datasets demonstrates that our method
+          for semantic segmentation achieves state-of-the-art results with <strong>87.5%</strong> and <strong>84.7%</strong>
+          mF1 on the SUM and seMet datasets, respectively. Pre-training by MEJA yields consistent performance
+          improvements compared to supervised learning from scratch.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Meaningful embeddings, without any labels</h2>
+      <figure class="figure">
+        <img src="assets/img/figure1_pca_similarity.webp" alt="PCA of MEJA embeddings and feature similarity heatmaps for roof, facade, and terrain faces" loading="lazy">
+        <figcaption>
+          <strong>Left:</strong> first three PCA components of the MEJA embeddings for two input meshes &mdash; different
+          semantic categories separate cleanly even though MEJA never sees a single label during pre-training.
+          <strong>Right:</strong> cosine similarity between a selected face's embedding (yellow marker) and every other
+          face, for three classes (roof, facade, terrain). Faces of the same class light up in red; unrelated faces stay blue.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section alt" id="method">
+    <div class="container narrow">
+      <h2 class="section-title">Method</h2>
+
+      <h3 class="sub-title">1&nbsp;&middot;&nbsp; A texture-aware transformer for non-manifold meshes</h3>
+      <p>
+        Each mesh face is represented by a combination of handcrafted geometric features and a learned texture
+        embedding, computed via a single-block transformer over <em>all</em> pixels belonging to that face &mdash;
+        made tractable at scale thanks to FlashAttention. Face tokens are grouped into clusters with k-means and
+        processed by a stack of transformer blocks, but unlike prior work that fixes one clustering for the whole
+        network, MEJA generates a <em>new</em> clustering arrangement for every block. Because a face's neighbours in
+        one block are different from its neighbours in the next, information propagates across the entire mesh tile
+        without ever paying for full quadratic attention, and without assuming the mesh is manifold.
+      </p>
+      <figure class="figure">
+        <img src="assets/img/figure2_architecture.webp" alt="Network architecture: feature extraction, dynamic multi-configuration clustering, transformer encoder blocks, classification head" loading="lazy">
+        <figcaption>
+          Feature extraction encodes geometry and texture into per-face embeddings; successive transformer blocks each
+          operate on a different clustering of the mesh, giving the network both local precision and global context.
+        </figcaption>
+      </figure>
+
+      <h3 class="sub-title">2&nbsp;&middot;&nbsp; MEJA: predicting masked mesh regions in latent space</h3>
+      <p>
+        Inspired by the Joint-Embedding Predictive Architecture (JEPA), MEJA pre-trains the network without any
+        labels. A <strong>context encoder</strong> sees only a subset of the mesh's face clusters; a <strong>target
+        encoder</strong> (updated by an exponential moving average of the context encoder) sees the complete mesh. A
+        lightweight <strong>predictor</strong> is tasked with reconstructing the target encoder's representation of the
+        masked clusters from the context encoder's output alone. Training combines this latent-prediction loss with a
+        variance&ndash;covariance regularization term (VICReg) to prevent representation collapse. After pre-training,
+        only the context encoder is kept and fine-tuned &mdash; or even linearly probed &mdash; on the downstream
+        segmentation task.
+      </p>
+      <figure class="figure">
+        <img src="assets/img/figure3_meja_framework.webp" alt="MEJA framework: context encoder, target encoder with EMA update, predictor aligning masked cluster representations" loading="lazy">
+        <figcaption>
+          MEJA masks contiguous clusters of the mesh, then trains a predictor to align its estimate of the masked
+          regions with the target encoder's representation &mdash; learning semantics purely from partial observations.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="results">
+    <div class="container">
+      <h2 class="section-title">Results</h2>
+
+      <h3 class="sub-title center">State-of-the-art semantic segmentation</h3>
+      <p class="lede">Evaluated on two urban-scale benchmarks (SUM, seMet) and a cultural-heritage damage-detection
+        dataset (CH), against mesh-based baselines capable of handling non-manifold geometry.</p>
+
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Method</th>
+              <th colspan="2">SUM</th>
+              <th colspan="2">seMet</th>
+              <th colspan="2">CH</th>
+            </tr>
+            <tr>
+              <th>mF1</th><th>OA</th><th>mF1</th><th>OA</th><th>mF1</th><th>OA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>RF&#8209;MRF</td><td>68.1</td><td>91.2</td><td>47.8</td><td>83.4</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>SUM&#8209;RF</td><td>73.8</td><td>93.0</td><td>81.1</td><td>95.3</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>PSSNet</td><td>83.8</td><td>94.1</td><td>82.3</td><td>96.0</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr><td>DiffusionNet</td><td>60.1</td><td>80.4</td><td>63.8</td><td>25.9</td><td>25.9</td><td>63.8</td></tr>
+            <tr><td>NoMeFormer</td><td>66.6</td><td>84.3</td><td>67.9</td><td>34.1</td><td>34.1</td><td>67.9</td></tr>
+            <tr><td>Semantic Seg. of Textured Non-Manifold Meshes</td><td>81.9</td><td>94.3</td><td>80.1</td><td>93.8</td><td>49.7</td><td>72.8</td></tr>
+            <tr><td>UrbanSegNet</td><td>86.9</td><td>93.9</td><td>84.4</td><td>95.9</td><td>&ndash;</td><td>&ndash;</td></tr>
+            <tr class="ours">
+              <td>Ours</td><td>87.5</td><td>94.5</td><td>84.7</td><td>96.0</td><td>54.6</td><td>74.5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">mF1 / OA in %. Baseline numbers as reported by the UrbanSegNet benchmark protocol.</p>
+
+      <h3 class="sub-title center">Qualitative comparison</h3>
+      <figure class="figure">
+        <img src="assets/img/figure4_qualitative.webp" alt="Qualitative segmentation comparison across SUM, seMet and CH datasets, versus two baseline methods" loading="lazy">
+        <figcaption>
+          Top-view segmentation maps on SUM, seMet, and CH. Our method recovers cleaner class boundaries and fewer
+          spurious regions than prior transformer-based approaches, especially for thin structures such as roads and joints.
+        </figcaption>
+      </figure>
+
+      <h3 class="sub-title center">Self-supervised pre-training accelerates and improves learning</h3>
+      <p class="lede">
+        We pre-train MEJA on 108M unlabelled faces (SUM + seMet + a curated subset of the Helsinki 3D City Model) and
+        evaluate under linear probing (LP), 10%-data few-shot fine-tuning (FS), and full fine-tuning (FF).
+      </p>
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Method</th><th>Setting</th><th>Params</th><th>Data</th><th>SUM</th><th>seMet</th><th>CH</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="3">Training from scratch</td><td>LP</td><td>&lt;1%</td><td>100%</td><td>14.1</td><td>12.0</td><td>19.3</td></tr>
+            <tr><td>FS</td><td>100%</td><td>10%</td><td>46.4</td><td>21.1</td><td>40.9</td></tr>
+            <tr><td>FF</td><td>100%</td><td>100%</td><td>87.5</td><td>84.7</td><td>54.6</td></tr>
+            <tr class="ours"><td rowspan="3">MEJA</td><td>LP</td><td>&lt;1%</td><td>100%</td><td>59.4</td><td>54.1</td><td>30.2</td></tr>
+            <tr class="ours"><td>FS</td><td>100%</td><td>10%</td><td>61.7</td><td>39.6</td><td>41.3</td></tr>
+            <tr class="ours"><td>FF</td><td>100%</td><td>100%</td><td>88.7</td><td>85.2</td><td>54.8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">mF1 [%]. LP: linear probing &middot; FS: few-shot (10% labels) &middot; FF: full fine-tuning.</p>
+
+      <div class="highlight-row">
+        <div class="highlight">
+          <div class="highlight-num">46.4 &rarr; 61.7</div>
+          <div class="highlight-label">Few-shot mF1 on SUM with only 10% labels</div>
+        </div>
+        <div class="highlight">
+          <div class="highlight-num">150 &rarr; 40</div>
+          <div class="highlight-label">Epochs to reach best full fine-tuning result on SUM</div>
+        </div>
+        <div class="highlight">
+          <div class="highlight-num">14.1 &rarr; 59.4</div>
+          <div class="highlight-label">Linear-probing mF1 on SUM &mdash; frozen encoder, &lt;1% of parameters trained</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container narrow">
+      <h2 class="section-title">Ablations</h2>
+      <div class="ablation-grid">
+        <div class="ablation-card">
+          <h4>Cluster granularity</h4>
+          <p>3,000 clusters in the first stage gives the best balance between structurally meaningful segments and
+            prediction difficulty (mF1 59.4%); coarser or finer partitions both hurt performance.</p>
+        </div>
+        <div class="ablation-card">
+          <h4>Progressive masking schedule</h4>
+          <p>Ramping the masking ratio from 0.2 to 0.6 over training (curriculum-style) beats any static ratio,
+            improving mF1 from 40.9% (static 0.2) to 59.4%.</p>
+        </div>
+        <div class="ablation-card">
+          <h4>VICReg regularization</h4>
+          <p>Removing the variance&ndash;covariance loss collapses representation quality to 39.6% mF1; combining
+            both terms yields a synergistic jump to 59.4%.</p>
+        </div>
+        <div class="ablation-card">
+          <h4>Cross-dataset transfer</h4>
+          <p>Pre-training on SUM and linearly probing on seMet still reaches 50.3% mF1, showing MEJA learns features
+            that generalize across urban mesh datasets.</p>
+        </div>
+        <div class="ablation-card">
+          <h4>Pre-training data scale</h4>
+          <p>mF1 rises steadily from 50.6% (25% of pre-training data) to 59.4% (100%), with early signs of a plateau
+            &mdash; motivating smarter data curation over raw scale.</p>
+        </div>
+        <div class="ablation-card">
+          <h4>Full texture, not a downsampled proxy</h4>
+          <p>Processing every pixel per face via FlashAttention &mdash; instead of a truncated or single-orthophoto
+            texture representation &mdash; is a key driver of the gains over prior transformer baselines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bibtex">
+    <div class="container narrow">
+      <h2 class="section-title">BibTeX</h2>
+      <div class="code-card">
+        <button class="copy-btn" id="copyBtn" type="button" aria-label="Copy BibTeX to clipboard">Copy</button>
+        <pre id="bibtexText">@inproceedings{heidarianbaei2026meja,
+  title     = {{MEJA}: A Self-Supervised Joint-Embedding Predictive Architecture for {3D} Mesh Semantic Segmentation},
+  author    = {Heidarianbaei, Mohammadreza and Mehltretter, Max and Rottensteiner, Franz},
+  booktitle = {British Machine Vision Conference (BMVC)},
+  year      = {2026}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>Institute of Photogrammetry and GeoInformation &middot; Leibniz University Hannover</p>
+    <p class="footer-muted">Page built with a lightweight custom template &mdash; no external dependencies.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
