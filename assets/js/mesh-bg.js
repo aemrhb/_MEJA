@@ -8,7 +8,7 @@ if (canvas && hero && window.WebGLRenderingContext) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x0b0f2a, 2.4, 5.5);
+  scene.fog = new THREE.Fog(0xffffff, 2.2, 5.2);
 
   const camera = new THREE.PerspectiveCamera(42, hero.clientWidth / hero.clientHeight, 0.1, 100);
   camera.position.set(0, 2.1, 1.55);
