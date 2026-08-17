@@ -73,27 +73,6 @@
 
 <main>
 
-  <section class="stats-strip">
-    <div class="container stats-grid">
-      <div class="stat">
-        <div class="stat-value">87.5<span>%</span></div>
-        <div class="stat-label">mF1 on SUM</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">84.7<span>%</span></div>
-        <div class="stat-label">mF1 on seMet</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">54.6<span>%</span></div>
-        <div class="stat-label">mF1 on CH (heritage)</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">108M<span></span></div>
-        <div class="stat-label">faces used for self-supervised pre-training</div>
-      </div>
-    </div>
-  </section>
-
   <section class="section" id="abstract">
     <div class="container narrow">
       <h2 class="section-title">Abstract</h2>
@@ -177,6 +156,25 @@
     <div class="container">
       <h2 class="section-title">Results</h2>
 
+      <div class="stats-grid results-stats">
+        <div class="stat">
+          <div class="stat-value">87.5<span>%</span></div>
+          <div class="stat-label">mF1 on SUM</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">84.7<span>%</span></div>
+          <div class="stat-label">mF1 on seMet</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">54.6<span>%</span></div>
+          <div class="stat-label">mF1 on CH (heritage)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">108M<span></span></div>
+          <div class="stat-label">faces used for self-supervised pre-training</div>
+        </div>
+      </div>
+
       <h3 class="sub-title center">State-of-the-art semantic segmentation</h3>
       <p class="lede">Evaluated on two urban-scale benchmarks (SUM, seMet) and a cultural-heritage damage-detection
         dataset (CH), against mesh-based baselines capable of handling non-manifold geometry.</p>
@@ -255,44 +253,6 @@
         <div class="highlight">
           <div class="highlight-num">14.1 &rarr; 59.4</div>
           <div class="highlight-label">Linear-probing mF1 on SUM &mdash; frozen encoder, &lt;1% of parameters trained</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt">
-    <div class="container narrow">
-      <h2 class="section-title">Ablations</h2>
-      <div class="ablation-grid">
-        <div class="ablation-card">
-          <h4>Cluster granularity</h4>
-          <p>3,000 clusters in the first stage gives the best balance between structurally meaningful segments and
-            prediction difficulty (mF1 59.4%); coarser or finer partitions both hurt performance.</p>
-        </div>
-        <div class="ablation-card">
-          <h4>Progressive masking schedule</h4>
-          <p>Ramping the masking ratio from 0.2 to 0.6 over training (curriculum-style) beats any static ratio,
-            improving mF1 from 40.9% (static 0.2) to 59.4%.</p>
-        </div>
-        <div class="ablation-card">
-          <h4>VICReg regularization</h4>
-          <p>Removing the variance&ndash;covariance loss collapses representation quality to 39.6% mF1; combining
-            both terms yields a synergistic jump to 59.4%.</p>
-        </div>
-        <div class="ablation-card">
-          <h4>Cross-dataset transfer</h4>
-          <p>Pre-training on SUM and linearly probing on seMet still reaches 50.3% mF1, showing MEJA learns features
-            that generalize across urban mesh datasets.</p>
-        </div>
-        <div class="ablation-card">
-          <h4>Pre-training data scale</h4>
-          <p>mF1 rises steadily from 50.6% (25% of pre-training data) to 59.4% (100%), with early signs of a plateau
-            &mdash; motivating smarter data curation over raw scale.</p>
-        </div>
-        <div class="ablation-card">
-          <h4>Full texture, not a downsampled proxy</h4>
-          <p>Processing every pixel per face via FlashAttention &mdash; instead of a truncated or single-orthophoto
-            texture representation &mdash; is a key driver of the gains over prior transformer baselines.</p>
         </div>
       </div>
     </div>

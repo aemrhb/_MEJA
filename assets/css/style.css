@@ -204,16 +204,18 @@ body {
   font-size: 0.78rem;
 }
 
-/* ---------- Stats strip ---------- */
-.stats-strip {
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
-}
+/* ---------- Stats ---------- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 36px 24px;
+  gap: 16px;
+}
+.results-stats { margin: 0 0 40px; }
+.results-stats .stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 12px;
 }
 .stat { text-align: center; }
 .stat-value {
@@ -355,29 +357,6 @@ body {
   color: var(--text-muted);
 }
 
-/* ---------- Ablation grid ---------- */
-.ablation-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-.ablation-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 22px;
-}
-.ablation-card h4 {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  color: var(--accent);
-}
-.ablation-card p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
 /* ---------- BibTeX ---------- */
 .code-card {
   position: relative;
@@ -425,7 +404,6 @@ body {
 @media (max-width: 720px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .highlight-row { grid-template-columns: 1fr; }
-  .ablation-grid { grid-template-columns: 1fr; }
   .hero { padding: 64px 0 48px; }
   .section { padding: 52px 0; }
 }
